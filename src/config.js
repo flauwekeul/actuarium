@@ -8,4 +8,7 @@ export const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID
 }
 
-export const rrfConfig = {}
+export const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true
+}
