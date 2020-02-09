@@ -2,12 +2,14 @@ import { Formik } from 'formik'
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { useFirebase, useFirestore } from 'react-redux-firebase'
+import { useDispatch } from 'react-redux'
+import { useFirestore } from 'react-redux-firebase'
+import { loginPlayer } from '../actions'
 import LoginButton from './LoginButton'
 
 const Login = () => {
-  const firebase = useFirebase()
   const firestore = useFirestore()
+  const dispatch = useDispatch()
 
   const validate = async ({ name, code }) => {
     const errors = {}
@@ -35,15 +37,7 @@ const Login = () => {
       return
     }
 
-    const { user } = await firebase.auth().signInAnonymously()
-    await user.updateProfile({ displayName })
-    // add player to users collection
-    await firestore.set({ collection: 'users', doc: user.uid }, { displayName })
-    // add player id to game
-    return firestore.update(
-      { collection: 'games', doc: docs[0].id },
-      { playerIds: firestore.FieldValue.arrayUnion(user.uid) }
-    )
+    return dispatch(loginPlayer({ displayName, gameId: docs[0].id }))
   }
 
   return (

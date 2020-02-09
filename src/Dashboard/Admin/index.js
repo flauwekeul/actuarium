@@ -1,34 +1,23 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import { useSelector } from 'react-redux'
-import { useFirestore, useFirestoreConnect } from 'react-redux-firebase'
-import { createRandomCode } from '../../utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
+import { createGame } from '../../actions'
 import CreateGame from './CreateGame'
 import GameLobby from './GameLobby'
 
-const Admin = ({ user: { uid } }) => {
-  const firestore = useFirestore()
-  const games = useSelector(state => state.firestore.ordered.games || [])
-  const currentGame = games[0]
+const Admin = ({ user }) => {
+  const dispatch = useDispatch()
+  const [game] = useSelector(state => state.firestore.ordered.games || [])
 
-  useFirestoreConnect({ collection: 'games', where: ['createdBy', '==', uid] })
-
-  const createGame = () => {
-    firestore.collection('games').add({
-      createdBy: uid,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-      code: createRandomCode(),
-      status: 'created', // created | inProgress | stopped | finished
-      round: 1
-    })
-  }
+  useFirestoreConnect({ collection: 'games', where: ['createdBy', '==', user.uid] })
 
   return (
     <Container fluid>
       <Jumbotron>
         <h1 className="text-center mb-4">Current game</h1>
-        {games.length > 0 ? <GameLobby {...currentGame} /> : <CreateGame click={createGame} />}
+        {game ? <GameLobby {...game} /> : <CreateGame click={() => dispatch(createGame())} />}
       </Jumbotron>
     </Container>
   )

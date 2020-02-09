@@ -3,8 +3,10 @@ import Badge from 'react-bootstrap/Badge'
 import Col from 'react-bootstrap/Col'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Row from 'react-bootstrap/Row'
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
 
-const GameLobby = ({ code, playerIds = [] }) => {
+const GameLobby = ({ id, code }) => {
   const codeChars = code
     .toUpperCase()
     .split('')
@@ -13,6 +15,9 @@ const GameLobby = ({ code, playerIds = [] }) => {
         {char}
       </Badge>
     ))
+  const players = useSelector(state => state.firestore.ordered.users || [])
+
+  useFirestoreConnect({ collection: 'users', where: ['gameId', '==', id] })
 
   return (
     <Row>
@@ -23,14 +28,13 @@ const GameLobby = ({ code, playerIds = [] }) => {
       </Col>
       <Col sm>
         <h4>Players</h4>
-        {playerIds.length > 0 ? (
-          // fixme: list players instead of player ids
+        {players.length > 0 ? (
           <>
             <p>These players are waiting for the game to start:</p>
             <ListGroup horizontal="sm">
-              {playerIds.map((id, i) => (
+              {players.map(({ displayName }, i) => (
                 <ListGroup.Item key={i} variant="info">
-                  {id}
+                  {displayName}
                 </ListGroup.Item>
               ))}
             </ListGroup>

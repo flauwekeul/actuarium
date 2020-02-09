@@ -7,7 +7,7 @@
 - [x] Create (or continue) a game
 - [ ] Dashboard:
   - [x] Code that participants can use to join game
-  - [ ] List of participants
+  - [x] List of participants
   - [ ] Button to start game (at least 6 participants?) or set current round
   - [ ] Timer
   - [ ] Current round's statistics
@@ -25,7 +25,7 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 10 (hours)
+Time spent so far: 13 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

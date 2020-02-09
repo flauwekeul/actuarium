@@ -1,13 +1,12 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-import { useFirebase } from 'react-redux-firebase'
+import { useDispatch } from 'react-redux'
+import { loginAdmin } from '../actions'
 
 const LoginButton = () => {
-  const firebase = useFirebase()
+  const dispatch = useDispatch()
 
-  const login = () => {
-    firebase.login({ provider: 'google', type: 'popup' })
-  }
+  const login = () => dispatch(loginAdmin())
 
   return (
     <Button onClick={login} variant="link" block>
