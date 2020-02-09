@@ -32,13 +32,15 @@ export const logout = () => async (dispatch, getState, getFirebase) => {
 
 export const removePlayer = () => async (dispatch, getState, getFirebase) => {
   const { firebase } = getState()
-  const { firestore } = getFirebase()
+  const { auth, firestore } = getFirebase()
   const { uid } = firebase.auth
 
-  return firestore()
+  await firestore()
     .collection('users')
     .doc(uid)
     .delete()
+
+  return auth().currentUser.delete()
 }
 
 export const createGame = () => async (dispatch, getState, getFirebase) => {
