@@ -5,14 +5,14 @@ import { useFirestoreConnect } from 'react-redux-firebase'
 import { createGame } from '../state/actions'
 import { getCurrentGame } from '../state/selectors'
 import CreateGame from './CreateGame'
-import Game from './Game'
+import Lobby from './Lobby'
 
 const Admin = ({ user }) => {
   const dispatch = useDispatch()
   useFirestoreConnect({ collection: 'games', where: ['createdBy', '==', user.id], storeAs: 'currentGame' })
   const game = useSelector(getCurrentGame)
 
-  return <Container fluid>{game ? <Game {...game} /> : <CreateGame click={() => dispatch(createGame())} />}</Container>
+  return <Container fluid>{game ? <Lobby {...game} /> : <CreateGame click={() => dispatch(createGame())} />}</Container>
 }
 
 export default Admin

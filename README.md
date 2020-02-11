@@ -9,6 +9,7 @@
   - [x] Code that participants can use to join game
   - [x] List of participants
   - [x] Button to start game (at least 6 participants?) or set current round
+  - [ ] Current round and rules
   - [ ] Timer
   - [ ] Current round's statistics
   - [ ] Insurer and customer rankings
@@ -25,7 +26,7 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 19 (hours)
+Time spent so far: 20 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
