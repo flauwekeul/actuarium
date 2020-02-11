@@ -3,12 +3,13 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
+import { getPlayers } from '../../state/selectors'
 import Code from './Code'
 import PlayerList from './PlayerList'
 
 const Game = ({ id, code }) => {
   useFirestoreConnect({ collection: 'users', where: ['gameId', '==', id], storeAs: 'players' })
-  const players = useSelector(state => state.firestore.ordered.players || [])
+  const players = useSelector(getPlayers)
 
   return (
     <Row>

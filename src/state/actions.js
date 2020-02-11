@@ -1,4 +1,5 @@
 import { createRandomCode } from '../utils'
+import { getCurrentGame, getCurrentUser } from './selectors'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
   return getFirebase().login({ provider: 'google', type: 'popup' })
@@ -16,7 +17,7 @@ export const loginPlayer = ({ displayName, gameId }) => async (dispatch, getStat
 }
 
 export const logout = () => async (dispatch, getState, getFirebase) => {
-  const { id, isAdmin } = getState().firestore.ordered.currentUser[0]
+  const { id, isAdmin } = getCurrentUser(getState())
   const { logout, firestore } = getFirebase()
 
   // remove user from users collection
@@ -39,13 +40,13 @@ export const deleteUserAccount = () => async (dispatch, getState, getFirebase) =
 }
 
 export const createGame = () => async (dispatch, getState, getFirebase) => {
-  const { firebase } = getState()
+  const { id } = getCurrentUser(getState())
   const { firestore } = getFirebase()
 
   return firestore()
     .collection('games')
     .add({
-      createdBy: firebase.auth.uid,
+      createdBy: id,
       createdAt: firestore.FieldValue.serverTimestamp(),
       code: createRandomCode(),
       status: 'created', // created | inProgress | stopped | finished,

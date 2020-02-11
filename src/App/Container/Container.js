@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Admin from '../../Admin/Admin'
 import Player from '../../Player'
 import { logout } from '../../state/actions'
+import { getCurrentUser } from '../../state/selectors'
 
 const Container = () => {
   const dispatch = useDispatch()
-  const [user] = useSelector(state => state.firestore.ordered.currentUser || [])
+  const user = useSelector(getCurrentUser)
 
   if (!user) {
     return null
