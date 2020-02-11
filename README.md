@@ -25,7 +25,7 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 13 (hours)
+Time spent so far: 16 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

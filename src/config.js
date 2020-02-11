@@ -9,6 +9,9 @@ export const firebaseConfig = {
 }
 
 export const rrfConfig = {
+  // profiles are only stored for non-anonymous users (admins)
   userProfile: 'users',
-  useFirestoreForProfile: true
+  useFirestoreForProfile: true,
+  // todo: use cloud functions to assign roles
+  profileFactory: ({ displayName, isAnonymous }) => ({ displayName, isAdmin: true })
 }

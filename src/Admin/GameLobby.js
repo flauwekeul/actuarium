@@ -15,9 +15,8 @@ const GameLobby = ({ id, code }) => {
         {char}
       </Badge>
     ))
-  const players = useSelector(state => state.firestore.ordered.users || [])
-
-  useFirestoreConnect({ collection: 'users', where: ['gameId', '==', id] })
+  useFirestoreConnect({ collection: 'users', where: ['gameId', '==', id], storeAs: 'players' })
+  const players = useSelector(state => state.firestore.ordered.players || [])
 
   return (
     <Row>

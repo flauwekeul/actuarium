@@ -2,7 +2,6 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
-// fixme: user.displayName is empty on first render and doesn't update afterwards
 const Player = ({ user }) => {
   return (
     <Container fluid>

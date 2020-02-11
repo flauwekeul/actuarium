@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import { useDispatch } from 'react-redux'
-import { loginAdmin } from '../actions'
+import { loginAdmin } from '../../actions'
 
 const LoginButton = () => {
   const dispatch = useDispatch()

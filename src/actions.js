@@ -1,46 +1,41 @@
 import { createRandomCode } from './utils'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
-  const { login } = getFirebase()
-  return login({ provider: 'google', type: 'popup' })
+  return getFirebase().login({ provider: 'google', type: 'popup' })
 }
 
 export const loginPlayer = ({ displayName, gameId }) => async (dispatch, getState, getFirebase) => {
   const { auth, firestore } = getFirebase()
   const { user } = await auth().signInAnonymously()
 
-  await user.updateProfile({ displayName })
-
+  // the profile of anonymous users (players) aren't stored automatically, so this is done manually:
   return firestore()
     .collection('users')
     .doc(user.uid)
-    .set({ displayName, gameId })
+    .set({ displayName, gameId, isAdmin: false })
 }
 
 export const logout = () => async (dispatch, getState, getFirebase) => {
-  const { firebase } = getState()
-  const { logout } = getFirebase()
-  const { isAnonymous } = firebase.auth
+  const { id, isAdmin } = getState().firestore.ordered.currentUser[0]
+  const { logout, firestore } = getFirebase()
 
-  // todo: use a function isPlayer() instead
-  if (isAnonymous) {
-    await dispatch(removePlayer())
+  // remove user from users collection
+  await firestore()
+    .collection('users')
+    .doc(id)
+    .delete()
+
+  if (!isAdmin) {
+    await dispatch(deleteUserAccount())
   }
 
   return logout()
 }
 
-export const removePlayer = () => async (dispatch, getState, getFirebase) => {
-  const { firebase } = getState()
-  const { auth, firestore } = getFirebase()
-  const { uid } = firebase.auth
-
-  await firestore()
-    .collection('users')
-    .doc(uid)
-    .delete()
-
-  return auth().currentUser.delete()
+export const deleteUserAccount = () => async (dispatch, getState, getFirebase) => {
+  return getFirebase()
+    .auth()
+    .currentUser.delete()
 }
 
 export const createGame = () => async (dispatch, getState, getFirebase) => {
