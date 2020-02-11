@@ -16,7 +16,7 @@ const Container = () => {
 
   return (
     <>
-      <Navbar variant="dark" bg="dark" className="mb-4">
+      <Navbar variant="dark" bg="dark" className="mb-5">
         <Navbar.Brand>Actuarium</Navbar.Brand>
         <Navbar.Text className="ml-auto mr-2">{user.displayName}</Navbar.Text>
         <Button size="sm" variant="outline-secondary" onClick={() => dispatch(logout())}>
