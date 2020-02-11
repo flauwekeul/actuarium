@@ -4,7 +4,7 @@ import { Provider, useSelector } from 'react-redux'
 import { isEmpty, isLoaded, ReactReduxFirebaseProvider, useFirestoreConnect } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import { rrfConfig as config } from '../config'
-import { store } from '../store'
+import { store } from '../state/store'
 import Login from './Login'
 
 export const withRedux = Component => props => (

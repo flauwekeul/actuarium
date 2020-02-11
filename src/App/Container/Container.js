@@ -2,9 +2,9 @@ import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../actions'
 import Admin from '../../Admin/Admin'
 import Player from '../../Player'
+import { logout } from '../../state/actions'
 
 const Container = () => {
   const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
-import { createGame } from '../actions'
+import { createGame } from '../state/actions'
 import CreateGame from './CreateGame'
 import GameLobby from './GameLobby'
 

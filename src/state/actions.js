@@ -1,4 +1,4 @@
-import { createRandomCode } from './utils'
+import { createRandomCode } from '../utils'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
   return getFirebase().login({ provider: 'google', type: 'popup' })

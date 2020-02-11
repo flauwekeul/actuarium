@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useDispatch } from 'react-redux'
 import { useFirestore } from 'react-redux-firebase'
-import { loginPlayer } from '../../actions'
+import { loginPlayer } from '../../state/actions'
 import './Login.css'
 import LoginButton from './LoginButton'
 
