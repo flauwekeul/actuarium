@@ -8,7 +8,7 @@ const renderChars = chars => (
     <p>Join this game with code:</p>
     <p className="h1 text-monospace">
       {chars.map((char, i) => (
-        <Badge key={i} variant="primary" className="mx-1">
+        <Badge key={i} variant="secondary" className="mx-1">
           {char}
         </Badge>
       ))}

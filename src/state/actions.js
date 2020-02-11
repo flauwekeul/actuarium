@@ -1,4 +1,5 @@
 import { createRandomCode } from '../utils'
+import { gameStatus } from './constants'
 import { getCurrentGame, getCurrentUser } from './selectors'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
@@ -49,7 +50,17 @@ export const createGame = () => async (dispatch, getState, getFirebase) => {
       createdBy: id,
       createdAt: firestore.FieldValue.serverTimestamp(),
       code: createRandomCode(),
-      status: 'created', // created | inProgress | stopped | finished,
+      status: gameStatus.created,
       round: 1
     })
+}
+
+export const startGame = () => async (dispatch, getState, getFirebase) => {
+  const { id } = getCurrentGame(getState())
+
+  return getFirebase()
+    .firestore()
+    .collection('games')
+    .doc(id)
+    .update({ status: gameStatus.inProgress })
 }
