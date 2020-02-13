@@ -1,13 +1,22 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
+import Game from '../Game'
+import { gameStatus } from '../state/constants'
+import { getCurrentGame } from '../state/selectors'
+import Welcome from './Welcome'
 
 const Player = ({ user }) => {
-  return (
-    <Container fluid>
-      <h1>Hi {user.displayName}!</h1>
-      <p>Wait for the teacher to start the game…</p>
-    </Container>
-  )
+  useFirestoreConnect({ collection: 'games', doc: user.gameId, storeAs: 'currentGame' })
+  const game = useSelector(getCurrentGame)
+
+  if (!game) {
+    return null
+  }
+
+  const isGameActive = game.status === gameStatus.inProgress
+  return <Container fluid>{isGameActive ? <Game {...game} /> : <Welcome {...user} />}</Container>
 }
 
 export default Player

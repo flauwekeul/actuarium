@@ -1,4 +1,3 @@
-import Numbers from './Numbers'
-import Rules from './Rules'
+import Game from './Game'
 
-export { Numbers, Rules }
+export default Game

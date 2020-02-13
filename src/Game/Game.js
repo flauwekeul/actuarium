@@ -1,21 +1,21 @@
 import React from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Numbers from '../../Game/Numbers'
-import Rules from '../../Game/Rules'
+import Numbers from './Numbers'
+import Rules from './Rules'
 
-const ActiveGame = ({ round }) => (
+const Game = ({ round }) => (
   <>
     <h1 className="display-3">Round {round}</h1>
     <Row>
-      <Col sm="4">
+      <Col md="4" className="mb-3">
         <Rules />
       </Col>
-      <Col sm="8">
+      <Col md="8">
         <Numbers />
       </Col>
     </Row>
   </>
 )
 
-export default ActiveGame
+export default Game

@@ -9,7 +9,7 @@
   - [x] Code that participants can use to join game
   - [x] List of participants
   - [x] Button to start game (at least 6 participants?) or set current round
-  - [ ] Current round and rules
+  - [x] Current round and rules
   - [ ] Timer
   - [ ] Current round's statistics
   - [ ] Insurer and customer rankings
