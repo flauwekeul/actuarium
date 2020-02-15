@@ -1,6 +1,7 @@
-import { createRandomCode } from '../utils'
+import { concat, map, pipe, prop, reduce, splitAt } from 'ramda'
+import { createRandomCode, shuffle } from '../utils'
 import { gameStatus } from './constants'
-import { getCurrentGame, getCurrentUser } from './selectors'
+import { getCurrentGame, getCurrentUser, getPlayers } from './selectors'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
   return getFirebase().login({ provider: 'google', type: 'popup' })
@@ -56,10 +57,24 @@ export const createGame = () => async (dispatch, getState, getFirebase) => {
 }
 
 export const startGame = () => async (dispatch, getState, getFirebase) => {
-  const { id } = getCurrentGame(getState())
+  const { firestore } = getFirebase()
+  const playersCollection = firestore().collection('users')
+  const batch = firestore().batch()
+  const shuffledPlayerIds = pipe(getState, getPlayers, map(prop('id')), shuffle)()
+  // 1 insurer for every 6 players
+  const nrOfInsurers = Math.ceil(shuffledPlayerIds.length / 6)
+  const [insurerIds, consumerIds] = splitAt(nrOfInsurers, shuffledPlayerIds)
+  const insurers = map(id => ({ id, role: 'insurer' }), insurerIds)
+  const consumers = map(id => ({ id, role: 'consumer' }), consumerIds)
+  const batchUpdatePlayers = pipe(
+    concat,
+    reduce((batch, { id, role }) => batch.update(playersCollection.doc(id), { role }), batch)
+  )(insurers, consumers)
 
-  return getFirebase()
-    .firestore()
+  await batchUpdatePlayers.commit()
+
+  const { id } = getCurrentGame(getState())
+  return firestore()
     .collection('games')
     .doc(id)
     .update({ status: gameStatus.inProgress })
