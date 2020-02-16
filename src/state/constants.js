@@ -1,6 +1,6 @@
 export const gameStatus = {
   created: 'created',
-  inProgress: 'inProgress',
+  active: 'active',
   stopped: 'stopped',
   finished: 'finished'
 }

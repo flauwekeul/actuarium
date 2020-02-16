@@ -26,7 +26,13 @@
   - [ ] Current round and rules
   - [ ] Notepad to make calculations?
 
-Time spent so far: 21 (hours)
+## Technical
+
+- [ ] Move some logic to Cloud Functions so that Firestore can become read-only
+- [ ] Bigger font size?
+- [ ] Hide game code once game has started?
+
+Time spent so far: 22 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

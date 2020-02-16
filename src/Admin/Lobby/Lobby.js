@@ -15,13 +15,13 @@ const Lobby = game => {
   const dispatch = useDispatch()
   useFirestoreConnect({ collection: 'users', where: ['gameId', '==', id], storeAs: 'players' })
   const players = useSelector(getPlayers)
-  const isGameActive = status === gameStatus.inProgress
+  const isGameActive = status === gameStatus.active
 
   return (
     <>
       <CardDeck className="mb-4">
         <Code code={code} />
-        <PlayerList players={players} />
+        <PlayerList players={players} game={game} />
       </CardDeck>
       {isGameActive ? <Game {...game} /> : <StartGameButton onClick={() => dispatch(startGame())} />}
     </>

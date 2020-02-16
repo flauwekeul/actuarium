@@ -15,7 +15,7 @@ const Player = ({ user }) => {
     return null
   }
 
-  const isGameActive = game.status === gameStatus.inProgress
+  const isGameActive = game.status === gameStatus.active
   return <Container fluid>{isGameActive ? <Game {...game} /> : <Welcome {...user} />}</Container>
 }
 

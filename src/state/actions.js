@@ -77,5 +77,5 @@ export const startGame = () => async (dispatch, getState, getFirebase) => {
   return firestore()
     .collection('games')
     .doc(id)
-    .update({ status: gameStatus.inProgress })
+    .update({ status: gameStatus.active })
 }
