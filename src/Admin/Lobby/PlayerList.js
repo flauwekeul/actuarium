@@ -2,7 +2,7 @@ import { always, cond, groupBy, isEmpty, pipe, prop } from 'ramda'
 import React from 'react'
 import Badge from 'react-bootstrap/Badge'
 import Card from 'react-bootstrap/Card'
-import { gameStatus } from '../../state/constants'
+import { isActive, isCreated } from '../../Game'
 
 const list = players =>
   players.map(({ displayName }, i) => (
@@ -34,13 +34,10 @@ const playersByRole = ({ insurer, consumer }) => (
 )
 
 const PlayerList = ({ players, game }) => {
-  // todo: this is duplicated
-  const isGameCreated = () => game.status === gameStatus.created
-  const isGameActive = () => game.status === gameStatus.active
   const list = cond([
     [isEmpty, always(noPlayers)],
-    [isGameCreated, allPlayers],
-    [isGameActive, pipe(groupBy(prop('role')), playersByRole)]
+    [() => isCreated(game), allPlayers],
+    [() => isActive(game), pipe(groupBy(prop('role')), playersByRole)]
   ])
 
   return (

@@ -1,6 +1,6 @@
 import { concat, map, pipe, prop, reduce, splitAt } from 'ramda'
+import { gameStatus } from '../Game'
 import { createRandomCode, shuffle } from '../utils'
-import { gameStatus } from './constants'
 import { getCurrentGame, getCurrentUser, getPlayers } from './selectors'
 
 export const loginAdmin = () => async (dispatch, getState, getFirebase) => {
