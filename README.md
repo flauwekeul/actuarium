@@ -30,9 +30,11 @@
 
 - [ ] Move some logic to Cloud Functions so that Firestore can become read-only
 - [ ] Bigger font size?
+- [ ] Use more colors (e.g. to more clearly distinguish between insurers and consumers)
 - [ ] Hide game code once game has started?
+- [ ] Give insurers the opportunity to rename their name to something more *insurery*-sounding
 
-Time spent so far: 22 (hours)
+Time spent so far: 23 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

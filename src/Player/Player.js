@@ -1,4 +1,5 @@
 import React from 'react'
+import Badge from 'react-bootstrap/Badge'
 import Container from 'react-bootstrap/Container'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
@@ -7,14 +8,24 @@ import { getCurrentGame } from '../state/selectors'
 import Welcome from './Welcome'
 
 const Player = ({ user }) => {
-  useFirestoreConnect({ collection: 'games', doc: user.gameId, storeAs: 'currentGame' })
+  const { gameId, role, displayName } = user
+  useFirestoreConnect({ collection: 'games', doc: gameId, storeAs: 'currentGame' })
   const game = useSelector(getCurrentGame)
 
   if (!game) {
     return null
   }
 
-  return <Container fluid>{isActive(game) ? <Game {...game} /> : <Welcome {...user} />}</Container>
+  const activeGame = (
+    <>
+      <h2 className="mb-4">
+        You're a <Badge variant="secondary">{role}</Badge>, {displayName}.
+      </h2>
+      <Game {...game} player={user} />
+    </>
+  )
+
+  return <Container fluid>{isActive(game) ? activeGame : <Welcome {...user} />}</Container>
 }
 
 export default Player

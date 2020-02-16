@@ -6,7 +6,7 @@ import Rules from './Rules'
 
 const Game = ({ round }) => (
   <>
-    <h1 className="display-3">Round {round}</h1>
+    <h1 className="display-3 mb-3">Round {round}</h1>
     <Row>
       <Col md="4" className="mb-3">
         <Rules />
