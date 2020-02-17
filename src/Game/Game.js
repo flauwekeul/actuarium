@@ -2,11 +2,12 @@ import React from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Numbers from './Numbers'
+import Round from './Round'
 import Rules from './Rules'
 
 const Game = ({ round }) => (
   <>
-    <h1 className="display-3 mb-3">Round {round}</h1>
+    <Round round={round} />
     <Row>
       <Col md="4" className="mb-3">
         <Rules />
