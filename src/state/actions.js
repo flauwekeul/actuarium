@@ -79,3 +79,16 @@ export const startGame = () => async (dispatch, getState, getFirebase) => {
     .doc(id)
     .update({ status: gameStatus.active })
 }
+
+export const saveGame = ({ input }) => async (dispatch, getState, getFirebase) => {
+  const { id } = getCurrentUser(getState())
+  const { firestore } = getFirebase()
+
+  return (
+    firestore()
+      .collection('users')
+      .doc(id)
+      // todo: don't hard-code round
+      .update({ round1: { input } })
+  )
+}
