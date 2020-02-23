@@ -34,7 +34,7 @@
 - [ ] Hide game code once game has started?
 - [ ] Give insurers the opportunity to rename their name to something more *insurery*-sounding
 
-Time spent so far: 23 (hours)
+Time spent so far: 25 (hours)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

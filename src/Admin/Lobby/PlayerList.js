@@ -1,4 +1,4 @@
-import { always, cond, groupBy, isEmpty, pipe, prop } from 'ramda'
+import { always, cond, groupBy, isEmpty, isNil, pipe, prop } from 'ramda'
 import React from 'react'
 import Badge from 'react-bootstrap/Badge'
 import Card from 'react-bootstrap/Card'
@@ -24,11 +24,11 @@ const playersByRole = ({ insurer, consumer }) => (
   <>
     <p className="h3">
       <small className="mr-2">Insurers:</small>
-      {!isEmpty(insurer) && list(insurer)}
+      {!isNil(insurer) && list(insurer)}
     </p>
     <p className="h3">
       <small className="mr-2">Consumers:</small>
-      {!isEmpty(consumer) && list(consumer)}
+      {!isNil(consumer) && list(consumer)}
     </p>
   </>
 )
