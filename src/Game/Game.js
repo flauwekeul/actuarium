@@ -9,11 +9,11 @@ const Game = ({ round, controls }) => (
   <>
     <Round round={round} />
     <Row className="mb-3">
-      <Col md="5">
+      <Col md="6">
         <Rules />
         {controls}
       </Col>
-      <Col md="7">
+      <Col md="6">
         <Numbers />
       </Col>
     </Row>
